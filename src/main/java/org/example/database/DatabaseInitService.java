@@ -7,15 +7,24 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static org.example.database.DatabaseQueryService.SQL_PATH;
+
 public class DatabaseInitService {
+
     public static void main(String[] args) {
-        try (Connection connection = Database.getInstance().getConnection()) {
-            String sqlContent = new String(Files.readAllBytes(Paths.get("src/main/resources/main/resources/init_db.sql")));
-            Statement statement = connection.createStatement();
+        executeSqlFile("init_db.sql");
+        System.out.println("Database initialized successfully.");
+    }
+
+    private static void executeSqlFile(String fileName) {
+        try (Connection connection = Database.getInstance().getConnection();
+             Statement statement = connection.createStatement()) {
+
+            String sqlContent = new String(Files.readAllBytes(Paths.get(SQL_PATH + fileName)));
             statement.execute(sqlContent);
-            System.out.println("Database initialized successfully.");
+
         } catch (SQLException | IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error executing SQL file: " + fileName, e);
         }
     }
 }

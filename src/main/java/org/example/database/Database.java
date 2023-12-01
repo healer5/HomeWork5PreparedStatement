@@ -5,11 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Database {
-
     private static final String URL = "jdbc:h2:~/test";
     private static final String USER = "username";
     private static final String PASSWORD = "password";
-
     private static Database instance;
     private Connection connection;
 

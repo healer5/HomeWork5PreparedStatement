@@ -1,6 +1,8 @@
 package org.example;
 
-import org.example.database.*;
+import org.example.database.DatabaseInitService;
+import org.example.database.DatabasePopulateService;
+import org.example.database.DatabaseQueryService;
 import org.example.services.*;
 
 import java.util.List;
@@ -8,7 +10,6 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         DatabaseInitService.main(args);
-
         DatabasePopulateService.main(args);
 
         DatabaseQueryService queryService = new DatabaseQueryService();
